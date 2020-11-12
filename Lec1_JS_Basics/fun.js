@@ -1,5 +1,7 @@
 // public , void , return type
 
+
+
 // function body
 function sayHi(name){
     console.log(name + " says Hiii !!");
