@@ -12,11 +12,12 @@ let cheerio = require("cheerio");
 
 
 // html selectors
+
 let htmlKaData = fs.readFileSync("./index.html" , "utf-8");
 
+// html file ke selectors se data chae
 
 let ch = cheerio.load(htmlKaData);
-
 // h1 ka data
 
 // <h1>Heading 1</h1>
@@ -29,7 +30,6 @@ console.log(pKaData);
 
 // let pKaData = ch(".outer.unique").text();
 // console.log(pKaData);
-
 // <h1>Heading 1</h1>
 let h1Element = ch("h1");
 console.log(h1Element);
