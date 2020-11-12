@@ -37,9 +37,81 @@ function parseData(html){
                 let balls = ch(allTds[3]).text().trim() ;
                 let fours = ch(allTds[5]).text().trim();
                 let sixes = ch(allTds[6]).text().trim();
-                console.log(`Batsman = ${batsmanName} Runs = ${runs} Balls = ${balls} Fours = ${fours} Sixes = ${sixes}`);
+                // console.log(`Batsman = ${batsmanName} Runs = ${runs} Balls = ${balls} Fours = ${fours} Sixes = ${sixes}`);
+                processDetails(teamName , batsmanName , runs , balls , fours , sixes);
             }
         }
+    }
+}
+
+
+// filesystem module
+function checkTeamFolder(teamName){
+    // teamName = "India"
+    return fs.existsSync(teamName);
+}
+
+function checkBatsmanFile(teamName , batsmanName){
+    // "India/MSDHoni.json";
+    let batsmanPath = `${teamName}/${batsmanName}.json`;
+    return fs.existsSync(batsmanPath);
+}
+
+function createTeamFolder(teamName){
+    fs.mkdirSync(teamName);
+}
+
+
+function updateBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes){
+    let batsmanPath = `${teamName}/${batsmanName}.json`;
+    let batsmanFile = fs.readFileSync(batsmanPath);
+    batsmanFile = JSON.parse(batsmanFile);
+    let inning = {
+        Runs : runs,
+        Balls : balls,
+        Fours : fours,
+        Sixes : sixes
+    }
+    batsmanFile.push(inning);
+    fs.writeFileSync(batsmanPath , JSON.stringify(batsmanFile));
+}
+
+
+function createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes){
+    // "India/MSDHoni.json";
+    let batsmanPath = `${teamName}/${batsmanName}.json`;
+    let batsmanFile = [];
+    let inning = {
+        Runs : runs,
+        Balls : balls,
+        Fours : fours,
+        Sixes : sixes
+    }
+    batsmanFile.push(inning);
+    fs.writeFileSync(batsmanPath , JSON.stringify(batsmanFile));
+}
+
+
+
+
+
+function processDetails(teamName , batsmanName , runs , balls , fours , sixes){
+    // check if team folder exists ?
+    let isTeamExist = checkTeamFolder(teamName);
+    
+    if(isTeamExist){
+        // check batsman ki file
+        let isBatsmanExist = checkBatsmanFile(teamName , batsmanName);
+        if(isBatsmanExist){
+            updateBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes);
+        }
+        else{
+            createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes);    
+        }
+    }
+    else{
+        createTeamFolder(teamName);
+        createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes);
     }
 }
 
