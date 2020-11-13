@@ -65,7 +65,9 @@ function createTeamFolder(teamName){
 function updateBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes){
     let batsmanPath = `${teamName}/${batsmanName}.json`;
     let batsmanFile = fs.readFileSync(batsmanPath);
-    batsmanFile = JSON.parse(batsmanFile);
+    // stringified
+    batsmanFile =JSON.parse(batsmanFile);
+    // orginial form
     let inning = {
         Runs : runs,
         Balls : balls,
@@ -90,10 +92,6 @@ function createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes
     batsmanFile.push(inning);
     fs.writeFileSync(batsmanPath , JSON.stringify(batsmanFile));
 }
-
-
-
-
 
 function processDetails(teamName , batsmanName , runs , balls , fours , sixes){
     // check if team folder exists ?
