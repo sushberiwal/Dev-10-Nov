@@ -47,23 +47,23 @@ function parseData(html){
 
 // filesystem module
 function checkTeamFolder(teamName){
-    // teamName = "India"
-    return fs.existsSync(teamName);
+    // teamName = "WorldCup/India"
+    return fs.existsSync("WorldCup/"+teamName);
 }
 
 function checkBatsmanFile(teamName , batsmanName){
-    // "India/MSDHoni.json";
-    let batsmanPath = `${teamName}/${batsmanName}.json`;
+    // "WorldCup/India/MSDHoni.json";
+    let batsmanPath = `WorldCup/${teamName}/${batsmanName}.json`;
     return fs.existsSync(batsmanPath);
 }
 
 function createTeamFolder(teamName){
-    fs.mkdirSync(teamName);
+    fs.mkdirSync("WorldCup/"+teamName);
 }
 
 
 function updateBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes){
-    let batsmanPath = `${teamName}/${batsmanName}.json`;
+    let batsmanPath = `WorldCup/${teamName}/${batsmanName}.json`;
     let batsmanFile = fs.readFileSync(batsmanPath);
     // stringified
     batsmanFile =JSON.parse(batsmanFile);
@@ -81,7 +81,7 @@ function updateBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes
 
 function createBatsmanFile(teamName , batsmanName , runs , balls , fours , sixes){
     // "India/MSDHoni.json";
-    let batsmanPath = `${teamName}/${batsmanName}.json`;
+    let batsmanPath = `WorldCup/${teamName}/${batsmanName}.json`;
     let batsmanFile = [];
     let inning = {
         Runs : runs,
