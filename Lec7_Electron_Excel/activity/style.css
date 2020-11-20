@@ -39,5 +39,5 @@ body{
 .cell{
     border: 1px solid;
     min-width: 80px;
-    min-height: 20px;
+    min-height: 25px;
 }

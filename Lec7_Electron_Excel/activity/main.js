@@ -1,7 +1,7 @@
 // npm init -y
 // npm install electron
 // "start":"electron ."
-
+// npm install ejs-electron
 
 // electron logic
 
