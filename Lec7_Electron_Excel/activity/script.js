@@ -17,6 +17,27 @@ $(document).ready(function () {
 
 
 
+  $(".cell").on("keypress , keydown" , function(){
+    console.log("key pressed !!!");
+    let cellId = $(this).attr("rowid");
+    let newHeight = $(this).height();
+    $(`.left-col-cell[cellid=${cellId}]`).height(newHeight);
+  })
+
+
+  // scrolling
+  $(".content").on("scroll" , function(){
+    let topOffSet = $(this).scrollTop();
+    let leftOffSet =  $(this).scrollLeft();
+
+    $(".top-left-col").css("top" , topOffSet+"px");
+    $(".top-left-col").css("left" , leftOffSet+"px");
+
+    $(".top-row").css("top" , topOffSet+"px");
+    $(".left-col").css("left"  ,leftOffSet+"px");
+  })
+
+
   $(".cell").on("keypress" , function(){
       console.log("key pressed !!");
   })
@@ -27,9 +48,6 @@ $(document).ready(function () {
     let colId = Number($(this).attr("colid"));
     let cellObject = db[rowId][colId];
     let value = $(this).html();
-
-
-
     if( value != cellObject.value ) {
       cellObject.value = value;
       if (cellObject.formula) {

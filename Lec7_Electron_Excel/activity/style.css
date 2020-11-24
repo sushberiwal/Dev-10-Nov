@@ -22,9 +22,9 @@ body{
 }
 
 .cells{
-    border: 1px solid;
-    height: calc(100vh - 140px);
-    overflow: auto;
+    position: absolute;
+    top: 20px;
+    left: 24px;
 }
 
 .sheets{
@@ -40,4 +40,52 @@ body{
     border: 1px solid;
     min-width: 80px;
     min-height: 25px;
+    max-width: 80px;
 }
+
+.content{
+    border: 1px solid;
+    height: calc(100vh - 140px);
+    overflow: auto;
+    position: relative;
+}
+
+
+.top-left-col{
+    background: lightgray;
+    height: 20px;
+    width: 25px;
+    position: absolute;
+    top: 0px;
+    z-index: 3;
+}
+
+.top-row{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    left: 24px;
+    background: lightgreen;
+    z-index: 2;
+}
+
+.top-row-cell{
+    border: 1px solid;
+    min-width: 80px;
+    min-height: 20px;
+    text-align: center;
+}
+
+.left-col{
+    position: absolute;
+    top: 20px;
+    background: lightgreen;
+    z-index: 2;
+}
+.left-col-cell{
+    border: 1px solid;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+}
+
