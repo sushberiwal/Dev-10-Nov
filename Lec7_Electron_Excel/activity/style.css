@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
 }
 
 body{
@@ -32,9 +33,10 @@ body{
 }
 
 .sheets{
-    border: 1px solid;
     height: 30px;
-}
+    display: flex;
+    align-items: center;
+    }
 
 .row{
     display: flex;
@@ -112,6 +114,10 @@ margin-left:10px;
 
 .home-menu-options{
     margin-left: 10px;
+    display: flex;
+    width: 35%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .hide{
@@ -126,3 +132,28 @@ margin-left:10px;
     border-radius:10px
 }
 
+
+.sheets-content{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.sheet{
+    margin-left: 10px;
+}
+
+.active-sheet{
+    padding: 3px;
+    background: lightgreen;
+    color: white;
+    border-radius: 10px;
+}
+
+.sheets-add{
+    margin-left: 12px;
+    background: lightgreen;
+    padding: 4px;
+    border-radius: 9px;
+    color: white;
+}

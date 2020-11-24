@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="menu">
@@ -17,7 +19,44 @@
             <div class="open">Open</div>
             <div class="save">Save</div>
         </div>
-        <div class="home-menu-options hide">Home Menu Options</div>
+        <div class="home-menu-options hide">
+            <div class="menu1">
+                <div class="font-family">
+                    <select name="" id="font-family">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                    </select>
+                </div>
+                <div class="font-styling">
+                    <button id="bold">B</button>
+                    <button id="underline">U</button>
+                    <button id="italic">I</button>
+                </div>
+            </div>
+            <div class="menu2">
+                <div class="font-size">
+                    <select name="font-size" id="font-size">
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                    </select>
+                </div>
+                <div class="color">
+                    <input type="color" name="cell-color" id="cell-color">
+                    <input type="color" name="font-color" id="font-color">
+                </div>
+            </div>
+            <div class="menu3">
+                <button id="left">L</button>
+                <button id="center">C</button>
+                <button id="right">R</button>
+            </div>
+        </div>
     </div>
     <div class="address">
         <input type="text" id="address" disabled>
@@ -46,7 +85,12 @@
         </div>
     </div>
     
-    <div class="sheets">Sheets</div>
+    <div class="sheets">
+        <div class="sheets-content">
+            <div class="sheet active-sheet" sid = "0">Sheet 1</div>
+        </div>
+        <div class="sheets-add">+</div>
+    </div>
 
 
     <script src="./script.js"></script>
