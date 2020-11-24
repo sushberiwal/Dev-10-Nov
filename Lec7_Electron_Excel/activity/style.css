@@ -9,11 +9,15 @@ body{
 .menu{
     border: 1px solid;
     height: 30px;
+    display: flex;
+    align-items: center;
 }
 
 .menu-options{
     border: 1px solid;
     height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 .address{
@@ -87,5 +91,38 @@ body{
     height: 25px;
     width: 25px;
     text-align: center;
+}
+
+
+
+.file{
+margin-left:10px;
+}
+
+.home{
+    margin-left:10px;
+}
+
+.file-menu-options{
+    margin-left: 10px;
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+}
+
+.home-menu-options{
+    margin-left: 10px;
+}
+
+.hide{
+    display: none;
+}
+
+
+.active-menu{
+    padding: 4px;
+    color: white;
+    background: lightgreen;
+    border-radius:10px
 }
 

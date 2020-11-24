@@ -1,5 +1,9 @@
 const $ = require("jquery");
 
+const dialog = require("electron").remote.dialog;
+const fs = require("fs");
+
+
 $(document).ready(function () {
   let db;
   let lsc; // last selected cell
@@ -15,6 +19,79 @@ $(document).ready(function () {
     $("#address").val(address);
   });
 
+
+
+  $(".file").on("click" , function(){
+    $(this).addClass("active-menu");
+    $(".home").removeClass("active-menu");
+    // filemenuOptions se hide remove
+    $(".file-menu-options").removeClass("hide");
+    // hide lag jae home-menu-options
+    $(".home-menu-options").addClass("hide");
+  })
+
+
+  $(".home").on("click" , function(){
+    $(this).addClass("active-menu");
+    $(".file").removeClass("active-menu");
+     // filemenuOptions pe hide 
+     $(".file-menu-options").addClass("hide");
+    // hide remove  home-menu-options
+    $(".home-menu-options").removeClass("hide");
+  })
+
+
+
+  // new file
+
+  $(".new").on("click" , function(){
+    db=[];
+    for(let i=0 ; i<100 ; i++){
+      let row = [];
+      for(let j=0 ; j<26 ; j++){
+        $(`.cell[rowid=${i}][colid=${j}]`).html('');
+        let name = String.fromCharCode(65 + j) + (i + 1);
+        let cellObject = {
+          name: name,
+          value: "",
+          formula: "",
+          childrens: [],
+          parents: []
+        };
+        row.push(cellObject);
+      }
+      db.push(row);
+    }
+  })
+
+  // open file
+  $(".open").on("click" , function(){
+    let files = dialog.showOpenDialogSync();
+    let data = fs.readFileSync(files[0]);
+    db = JSON.parse(data);
+    // database updated
+    // ui ???
+    let count=0;
+    for(let i=0 ; i<100 ; i++){
+      for(let j=0 ; j<26 ; j++){
+        let cellObject = db[i][j];
+        console.log(count);
+        count++;
+        $(`.cell[rowid=${i}][colid=${j}]`).text(cellObject.value);
+      }
+    }
+  })
+
+  // save file
+  $(".save").on("click" , function(){
+    let filePath = dialog.showSaveDialogSync();
+    if(filePath){
+      fs.writeFileSync(filePath , JSON.stringify(db));
+      alert("FILE SAVED SUCCESFULLY !!!")
+    }else{
+      alert("FILE NOT SAVED");
+    }
+  })
 
 
   $(".cell").on("keypress , keydown" , function(){
