@@ -25,6 +25,22 @@ $(document).ready(function () {
     visitedCells.push(lsc);
   }
 
+  function setUiNew(){
+    for (let i = 0; i < visitedCells.length; i++) {
+      let rowId = $(visitedCells[i]).attr("rowid");
+      let colId = $(visitedCells[i]).attr("colid");
+      $(`.cell[rowid=${rowId}][colid=${colId}]`).html("");
+    }
+  }
+
+  function setUi(){
+    for (let i = 0; i < visitedCells.length; i++) {
+      let rowId = $(visitedCells[i]).attr("rowid");
+      let colId = $(visitedCells[i]).attr("colid");
+      $(`.cell[rowid=${rowId}][colid=${colId}]`).html(db[rowId][colId].value);
+    }
+  }
+
   // sheets add
   $(".sheets-add").on("click", function () {
     // remove active sheet
@@ -41,25 +57,12 @@ $(document).ready(function () {
         let sheetId = $(this).attr("sid");
         $(".sheet.active-sheet").removeClass("active-sheet");
         $(this).addClass("active-sheet");
-        
         // ui new
-        for (let i = 0; i < visitedCells.length; i++) {
-          let rowId = $(visitedCells[i]).attr("rowid");
-          let colId = $(visitedCells[i]).attr("colid");
-          $(`.cell[rowid=${rowId}][colid=${colId}]`).html("");
-        }
-        
+        setUiNew();
         db = sheetsDb[sheetId].db;
         visitedCells = sheetsDb[sheetId].visitedCells;
         // ui set
-        for (let i = 0; i < visitedCells.length; i++) {
-          let rowId = $(visitedCells[i]).attr("rowid");
-          let colId = $(visitedCells[i]).attr("colid");
-          console.log(`.cell[rowid=${rowId}][colid=${colId}]`);
-          $(`.cell[rowid=${rowId}][colid=${colId}]`).html(
-            db[rowId][colId].value
-          );
-        }
+        setUi();
         // for (let i = 0; i < 100; i++) {
         //   for (let j = 0; j < 26; j++) {
         //     let cellObject = db[i][j];
@@ -75,13 +78,7 @@ $(document).ready(function () {
     //     $(`.cell[rowid=${i}][colid=${j}]`).html("");
     //   }
     // }
-
-    for (let i = 0; i < visitedCells.length; i++) {
-      let rowId = $(visitedCells[i]).attr("rowid");
-      let colId = $(visitedCells[i]).attr("colid");
-      $(`.cell[rowid=${rowId}][colid=${colId}]`).html("");
-    }
-
+    setUiNew();
     init(); // db new and push in sheetsDb;
   });
 
@@ -91,20 +88,11 @@ $(document).ready(function () {
       $(".sheet.active-sheet").removeClass("active-sheet");
       $(this).addClass("active-sheet");
       // ui new
-      for (let i = 0; i < visitedCells.length; i++) {
-        let rowId = $(visitedCells[i]).attr("rowid");
-        let colId = $(visitedCells[i]).attr("colid");
-        $(`.cell[rowid=${rowId}][colid=${colId}]`).html("");
-      }
+      setUiNew();
       db = sheetsDb[sheetId].db;
       visitedCells = sheetsDb[sheetId].visitedCells;
       // ui set
-      for (let i = 0; i < visitedCells.length; i++) {
-        let rowId = $(visitedCells[i]).attr("rowid");
-        let colId = $(visitedCells[i]).attr("colid");
-        // console.log(`.cell[rowid=${rowId}][colid=${colId}]`);
-        $(`.cell[rowid=${rowId}][colid=${colId}]`).html(db[rowId][colId].value);
-      }
+      setUi();
       // for (let i = 0; i < 100; i++) {
       // for (let j = 0; j < 26; j++) {
       // let cellObject = db[i][j];
@@ -189,13 +177,14 @@ $(document).ready(function () {
 
   // new file
   $(".new").on("click", function () {
+    setUiNew();
     db = [];
+    visitedCells = [];
     $("#address").val("");
     $("#formula").val("");
     for (let i = 0; i < 100; i++) {
       let row = [];
       for (let j = 0; j < 26; j++) {
-        $(`.cell[rowid=${i}][colid=${j}]`).html("");
         let name = String.fromCharCode(65 + j) + (i + 1);
         let cellObject = {
           name: name,
