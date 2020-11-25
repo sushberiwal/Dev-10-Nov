@@ -5,9 +5,25 @@ const fs = require("fs");
 
 $(document).ready(function () {
   let sheetsDb = [];
-
   let db; // current db
   let lsc; // last selected cell
+
+  // visited cells ka array
+  let visitedCells;
+
+  function addToVisitedCells(lsc) {
+    for (let i = 0; i < visitedCells.length; i++) {
+      let element = visitedCells[i];
+      let elemRowId = $(element).attr("rowid");
+      let elemColId = $(element).attr("colid");
+      let lscRowId = $(lsc).attr("rowId");
+      let lscColId = $(lsc).attr("colid");
+      if (elemRowId == lscRowId && elemColId == lscColId) {
+        return;
+      }
+    }
+    visitedCells.push(lsc);
+  }
 
   // sheets add
   $(".sheets-add").on("click", function () {
@@ -25,25 +41,48 @@ $(document).ready(function () {
         let sheetId = $(this).attr("sid");
         $(".sheet.active-sheet").removeClass("active-sheet");
         $(this).addClass("active-sheet");
-        db = sheetsDb[sheetId];
-        // ui set
-        for (let i = 0; i < 100; i++) {
-          for (let j = 0; j < 26; j++) {
-            let cellObject = db[i][j];
-            $(`.cell[rowid=${i}][colid=${j}]`).html(cellObject.value);
-          }
+        
+        // ui new
+        for (let i = 0; i < visitedCells.length; i++) {
+          let rowId = $(visitedCells[i]).attr("rowid");
+          let colId = $(visitedCells[i]).attr("colid");
+          $(`.cell[rowid=${rowId}][colid=${colId}]`).html("");
         }
+        
+        db = sheetsDb[sheetId].db;
+        visitedCells = sheetsDb[sheetId].visitedCells;
+        // ui set
+        for (let i = 0; i < visitedCells.length; i++) {
+          let rowId = $(visitedCells[i]).attr("rowid");
+          let colId = $(visitedCells[i]).attr("colid");
+          console.log(`.cell[rowid=${rowId}][colid=${colId}]`);
+          $(`.cell[rowid=${rowId}][colid=${colId}]`).html(
+            db[rowId][colId].value
+          );
+        }
+        // for (let i = 0; i < 100; i++) {
+        //   for (let j = 0; j < 26; j++) {
+        //     let cellObject = db[i][j];
+        //     $(`.cell[rowid=${i}][colid=${j}]`).html(cellObject.value);
+        //   }
+        // }
       }
     });
 
-    init(); // db new and push in sheetsDb;
-
     // ui new
-    for (let i = 0; i < 100; i++) {
-      for (let j = 0; j < 26; j++) {
-        $(`.cell[rowid=${i}][colid=${j}]`).html("");
-      }
+    // for (let i = 0; i < 100; i++) {
+    //   for (let j = 0; j < 26; j++) {
+    //     $(`.cell[rowid=${i}][colid=${j}]`).html("");
+    //   }
+    // }
+
+    for (let i = 0; i < visitedCells.length; i++) {
+      let rowId = $(visitedCells[i]).attr("rowid");
+      let colId = $(visitedCells[i]).attr("colid");
+      $(`.cell[rowid=${rowId}][colid=${colId}]`).html("");
     }
+
+    init(); // db new and push in sheetsDb;
   });
 
   $(".sheet").on("click", function () {
@@ -51,50 +90,63 @@ $(document).ready(function () {
       let sheetId = $(this).attr("sid");
       $(".sheet.active-sheet").removeClass("active-sheet");
       $(this).addClass("active-sheet");
-      db = sheetsDb[sheetId];
-      // ui set
-      for (let i = 0; i < 100; i++) {
-        for (let j = 0; j < 26; j++) {
-          let cellObject = db[i][j];
-          $(`.cell[rowid=${i}][colid=${j}]`).html(cellObject.value);
-        }
+      // ui new
+      for (let i = 0; i < visitedCells.length; i++) {
+        let rowId = $(visitedCells[i]).attr("rowid");
+        let colId = $(visitedCells[i]).attr("colid");
+        $(`.cell[rowid=${rowId}][colid=${colId}]`).html("");
       }
+      db = sheetsDb[sheetId].db;
+      visitedCells = sheetsDb[sheetId].visitedCells;
+      // ui set
+      for (let i = 0; i < visitedCells.length; i++) {
+        let rowId = $(visitedCells[i]).attr("rowid");
+        let colId = $(visitedCells[i]).attr("colid");
+        // console.log(`.cell[rowid=${rowId}][colid=${colId}]`);
+        $(`.cell[rowid=${rowId}][colid=${colId}]`).html(db[rowId][colId].value);
+      }
+      // for (let i = 0; i < 100; i++) {
+      // for (let j = 0; j < 26; j++) {
+      // let cellObject = db[i][j];
+      // $(`.cell[rowid=${i}][colid=${j}]`).html(cellObject.value);
+      // }
+      // }
     }
   });
 
-
-
   //bold // underline // italic
-  $(".font-styling button").on("click" , function(){
+  $(".font-styling button").on("click", function () {
     let id = $(this).attr("id");
     let rowId = $(lsc).attr("rowid");
     let colId = $(lsc).attr("colid");
     let cellObject = db[rowId][colId];
-    if(id == "bold"){
-      $(lsc).css("font-weight" , cellObject.fontStyle.bold ? "normal" : "bold");
+    if (id == "bold") {
+      $(lsc).css("font-weight", cellObject.fontStyle.bold ? "normal" : "bold");
       cellObject.fontStyle.bold = !cellObject.fontStyle.bold;
-    }
-    else if(id=="underline"){
-      $(lsc).css("text-decoration" , cellObject.fontStyle.underline ? "none" : "underline");
+    } else if (id == "underline") {
+      $(lsc).css(
+        "text-decoration",
+        cellObject.fontStyle.underline ? "none" : "underline"
+      );
       cellObject.fontStyle.underline = !cellObject.fontStyle.underline;
-    }
-    else{
-      $(lsc).css("font-style" , cellObject.fontStyle.italic ? "normal" : "italic");
+    } else {
+      $(lsc).css(
+        "font-style",
+        cellObject.fontStyle.italic ? "normal" : "italic"
+      );
       cellObject.fontStyle.italic = !cellObject.fontStyle.italic;
     }
-  })
-
-
+  });
 
   // text -align
-  $(".menu3 button").on("click" , function(){
+  $(".menu3 button").on("click", function () {
     let id = $(this).attr("id");
-    $(lsc).css("text-align" , id);
+    $(lsc).css("text-align", id);
     let rowId = $(lsc).attr("rowid");
     let colId = $(lsc).attr("colid");
     let cellObject = db[rowId][colId];
     cellObject.textAlign = id;
-  })
+  });
 
   $(".cell").on("click", function () {
     console.log(this);
@@ -107,16 +159,15 @@ $(document).ready(function () {
     $("#address").val(address);
   });
 
-
   // font-size
-  $("#font-size").on("change" , function(){
+  $("#font-size").on("change", function () {
     let fontSize = $(this).val();
-    $(lsc).css("font-size" , fontSize+"px");
+    $(lsc).css("font-size", fontSize + "px");
     let rowId = $(lsc).attr("rowid");
     let colId = $(lsc).attr("colid");
     let cellObject = db[rowId][colId];
-    cellObject.fontSize = fontSize+"px";
-  })
+    cellObject.fontSize = fontSize + "px";
+  });
 
   $(".file").on("click", function () {
     $(this).addClass("active-menu");
@@ -139,8 +190,8 @@ $(document).ready(function () {
   // new file
   $(".new").on("click", function () {
     db = [];
-    $("#address").val('');
-    $("#formula").val('');
+    $("#address").val("");
+    $("#formula").val("");
     for (let i = 0; i < 100; i++) {
       let row = [];
       for (let j = 0; j < 26; j++) {
@@ -158,7 +209,6 @@ $(document).ready(function () {
       db.push(row);
     }
   });
-
   // open file
   $(".open").on("click", function () {
     let files = dialog.showOpenDialogSync();
@@ -176,7 +226,6 @@ $(document).ready(function () {
       }
     }
   });
-
   // save file
   $(".save").on("click", function () {
     let filePath = dialog.showSaveDialogSync();
@@ -218,6 +267,8 @@ $(document).ready(function () {
     let cellObject = db[rowId][colId];
     let value = $(this).html();
     if (value != cellObject.value) {
+      addToVisitedCells(lsc);
+      console.log(sheetsDb);
       cellObject.value = value;
       if (cellObject.formula) {
         removeFormula(cellObject);
@@ -241,7 +292,6 @@ $(document).ready(function () {
     cellObject.parents = [];
     cellObject.formula = "";
   }
-
   function updateChildrens(cellObject) {
     // {
     //     name:"A1",
@@ -260,7 +310,6 @@ $(document).ready(function () {
       updateChildrens(childrenCellObject);
     }
   }
-
   $("#formula").on("click", function () {
     let rowId = Number($(lsc).attr("rowid"));
     let colId = Number($(lsc).attr("colid"));
@@ -308,15 +357,12 @@ $(document).ready(function () {
     let value = eval(formula);
     return value;
   }
-
   function addSelfToChildrensOfParent(cellObject, selfCellObject) {
     cellObject.childrens.push(selfCellObject.name);
   }
-
   function addParentsToSelfObject(cellObject, selfCellObject) {
     selfCellObject.parents.push(cellObject.name);
   }
-
   function getRowIdColIdFromAddress(address) {
     // address => "B2"
     let colId = address.charCodeAt(0) - 65;
@@ -326,9 +372,9 @@ $(document).ready(function () {
       colId: colId,
     };
   }
-
   function init() {
     db = [];
+    visitedCells = [];
     for (let i = 0; i < 100; i++) {
       let row = [];
       for (let j = 0; j < 26; j++) {
@@ -340,17 +386,21 @@ $(document).ready(function () {
           formula: "",
           childrens: [],
           parents: [],
-          fontStyle : { bold : false , underline : false , italic : false },
-          textAlign : "left",
-          fontSize : "16px",
-          color : {cellColor : "white" , fontColor:"black"}
+          fontStyle: { bold: false, underline: false, italic: false },
+          textAlign: "left",
+          fontSize: "16px",
+          color: { cellColor: "white", fontColor: "black" },
         };
         row.push(cellObject);
       }
       db.push(row);
     }
     // db initialize
-    sheetsDb.push(db);
+    let sheetObject = {
+      visitedCells: visitedCells,
+      db: db,
+    };
+    sheetsDb.push(sheetObject);
     // console.log(db);
     console.log(sheetsDb);
   }
