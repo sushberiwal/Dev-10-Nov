@@ -1,0 +1,16 @@
+*{
+    box-sizing: border-box;
+    padding:0px;
+    margin:0px;
+}
+
+
+.tools{
+    background: lightcyan;
+    height: 100px;
+}
+
+.canvas{
+    height: calc(100vh - 100px);
+    background: lightgreen;
+}

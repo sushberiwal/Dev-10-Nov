@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PepBoard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="tools"></div>
+    <div class="canvas">
+        <canvas id="canvas"></canvas>
+    </div>
+    <script>
+        let canvas = document.querySelector("#canvas");
+        let ctx = canvas.getContext('2d');
+
+        ctx.fillStyle = 'yellow';
+        ctx.fillRect(10 , 10 , 100 , 100);
+
+    </script>
+    <!-- <script src="./script.js"></script> -->
+</body>
+</html>

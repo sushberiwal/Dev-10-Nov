@@ -24,7 +24,6 @@ $(document).ready(function () {
     }
     visitedCells.push(lsc);
   }
-
   function setUiNew(){
     for (let i = 0; i < visitedCells.length; i++) {
       let rowId = $(visitedCells[i]).attr("rowid");
@@ -32,7 +31,6 @@ $(document).ready(function () {
       $(`.cell[rowid=${rowId}][colid=${colId}]`).html("");
     }
   }
-
   function setUi(){
     for (let i = 0; i < visitedCells.length; i++) {
       let rowId = $(visitedCells[i]).attr("rowid");
@@ -40,7 +38,6 @@ $(document).ready(function () {
       $(`.cell[rowid=${rowId}][colid=${colId}]`).html(db[rowId][colId].value);
     }
   }
-
   // sheets add
   $(".sheets-add").on("click", function () {
     // remove active sheet
