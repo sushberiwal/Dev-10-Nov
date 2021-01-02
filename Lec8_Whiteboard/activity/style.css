@@ -12,5 +12,11 @@
 
 .canvas{
     height: calc(100vh - 100px);
-    background: lightgreen;
+    /* background: lightgreen; */
+}
+
+#canvas{
+    /* height:100%;
+    width:100%; */
+    background: cornflowerblue;
 }

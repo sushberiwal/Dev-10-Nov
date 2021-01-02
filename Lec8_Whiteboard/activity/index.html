@@ -11,14 +11,26 @@
     <div class="canvas">
         <canvas id="canvas"></canvas>
     </div>
-    <script>
+    <!-- <script>
         let canvas = document.querySelector("#canvas");
         let ctx = canvas.getContext('2d');
 
-        ctx.fillStyle = 'yellow';
-        ctx.fillRect(10 , 10 , 100 , 100);
+        // ctx.fillStyle = 'yellow';
+        // ctx.fillRect(10 , 10 , 100 , 100);
+        ctx.strokeStyle = "black";
 
-    </script>
-    <!-- <script src="./script.js"></script> -->
+        ctx.beginPath();
+        ctx.moveTo(10,10);
+        ctx.lineTo(100 , 10);
+        ctx.lineTo(250 , 100);
+        ctx.lineTo(10 , 100);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(100,110);
+        ctx.lineTo(20,50);
+        ctx.stroke();
+    </script> -->
+    <script src="./script.js"></script>
 </body>
 </html>
