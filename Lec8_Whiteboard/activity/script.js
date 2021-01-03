@@ -12,6 +12,8 @@ window.addEventListener("resize", function () {
   //draw tha pehle se wo wapas draw ho jae
 });
 
+ctx.lineCap = "round";
+
 // ctx.beginPath();
 // ctx.moveTo(20,50);
 // ctx.lineTo(100,150);

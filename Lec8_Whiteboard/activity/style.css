@@ -1,50 +1,119 @@
 * {
-  box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
-}
-
-.tools-content {
-  /* background: lightcyan; */
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.canvas {
-  height: calc(100vh - 100px);
-  /* background: lightgreen; */
-}
-
-#canvas {
-  /* height:100%;
-    width:100%; */
-  /* background: cornflowerblue; */
-}
-
-.tools {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  .tools-content {
+    /* background: lightcyan; */
+    height: 100px;
     display: flex;
-    width: 80%;
-    background: white;
-    justify-content: space-evenly;
-    height: 80%;
     align-items: center;
-    border-radius: 15px;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
-}
-
-.tool {
-  height: 55px;
-}
-
-.tool img {
-  height: 100%;
-}
-
-.active-tool{
-    background: lightgray;
-    border-radius: 100%;
-    padding: 10px;
-    height: 65px;
-}
+    justify-content: center;
+  }
+  
+  .canvas {
+    height: calc(100vh - 100px);
+    /* background: lightgreen; */
+  }
+  
+  #canvas {
+    /* height:100%;
+      width:100%; */
+    /* background: cornflowerblue; */
+  }
+  
+  .tools {
+      display: flex;
+      width: 80%;
+      background: white;
+      justify-content: space-evenly;
+      height: 80%;
+      align-items: center;
+      border-radius: 15px;
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  }
+  
+  .tool {
+    height: 55px;
+    position: relative;
+  }
+  
+  .tool img {
+    height: 100%;
+  }
+  
+  .active-tool{
+      background: lightgray;
+      border-radius: 100%;
+      padding: 10px;
+      height: 65px;
+  }
+  
+  .tool-options{
+  
+  position: absolute;
+  
+  height: 120px;
+  
+  width: 150px;
+  
+  background: lightblue;
+  
+  top: 71px;
+  
+  left: -38px;
+  
+  border-radius: 15px;
+  
+  display: flex;
+  
+  flex-direction: column;
+  
+  justify-content: space-evenly;
+  
+  align-items: center;
+  }
+  
+  .tool-options input{
+  
+  }
+  
+  .pencil-colors{
+  
+  display: flex;
+  
+  justify-content: space-evenly;
+  
+  width: 100%;
+  }
+  
+  .pencil-colors div{
+      
+  height: 30px;
+      
+  width: 30px;
+      
+  border-radius: 50%;
+  }
+  
+  .red{
+  
+  background: red;
+  }
+  .blue{
+  
+  background: blue;
+  }
+  .yellow{
+  
+  background: yellow;
+  }
+  .black{
+  
+  background: black;
+  }
+  
+  .hide{
+      display: none;
+  }
