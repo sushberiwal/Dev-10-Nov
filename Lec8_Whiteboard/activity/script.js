@@ -9,6 +9,7 @@ window.addEventListener("resize", function () {
   canvas.height = window.innerHeight - canvasTop;
   canvas.width = window.innerWidth;
   //draw tha pehle se wo wapas draw ho jae
+  redraw();
 });
 
 let db = [];
