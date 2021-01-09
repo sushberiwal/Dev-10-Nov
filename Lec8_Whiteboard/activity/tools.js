@@ -11,13 +11,21 @@ let black = document.querySelector(".black");
 let pencilSize = document.querySelector('#pencil-size');
 let eraserSize = document.querySelector('#eraser-size');
 
+let undo = document.querySelector("#undo");
+let redo = document.querySelector("#redo");
 
 let lastPencilSize = 1;
 let lastEraserSize = 1;
 
+// px
+// em
+// 1rem = 16px
 
 
-pencilSize.addEventListener("change" , function(){
+
+
+pencilSize.addEventListener("change" , function(e){
+    console.log(e);
     lastPencilSize = pencilSize.value;
     ctx.lineWidth = lastPencilSize;
 })
@@ -84,3 +92,76 @@ eraser.addEventListener("click", function () {
     pencil.classList.remove("active-tool");
   }
 });
+
+
+
+
+undo.addEventListener("click" , function(){
+  let undoLine = db.pop();
+  redoDb.push(undoLine);
+  // eraseLine(undoLine);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  redraw();
+})
+
+
+redo.addEventListener("click" , function(){
+  if(redoDb.length){
+    let redoLine = redoDb.pop();
+    db.push(redoLine);
+    for(let i=0 ; i<redoLine.length ; i++){
+      let lineObj = redoLine[i];
+      ctx.strokeStyle = lineObj.color;
+      ctx.lineWidth = lineObj.width;
+      if(lineObj.id == 'md'){
+        ctx.beginPath();
+        ctx.moveTo(lineObj.x , lineObj.y);
+      }
+      else{
+        ctx.lineTo(lineObj.x , lineObj.y);
+        ctx.stroke();
+      }
+    }
+
+  }
+})
+
+function redraw(){
+  for(let i=0 ; i<db.length ; i++){
+    let line = db[i];
+    for(let j=0 ; j<line.length ; j++){
+      let lineObj = line[j];
+      ctx.strokeStyle = lineObj.color;
+      ctx.lineWidth = lineObj.width;
+      if(lineObj.id == 'md'){
+        ctx.beginPath();
+        ctx.moveTo(lineObj.x , lineObj.y);
+      }
+      else{
+        ctx.lineTo(lineObj.x , lineObj.y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+
+// function eraseLine(line){
+//   let currentStrokeStyle = ctx.strokeStyle;
+//   let currentLineWidth = ctx.lineWidth;
+//   ctx.strokeStyle = "white";
+//   ctx.lineWidth = currentLineWidth+2;
+//   for(let i=0 ; i<line.length ; i++){
+//     let lineObj = line[i];
+//     if(lineObj.id =="md"){
+//       ctx.beginPath();
+//       ctx.moveTo(lineObj.x , lineObj.y);
+//     }
+//     else{
+//       ctx.lineTo(lineObj.x , lineObj.y);
+//       ctx.stroke();
+//     }
+//   }
+//   ctx.strokeStyle = currentStrokeStyle;
+//   ctx.lineWidth = currentLineWidth;
+// }

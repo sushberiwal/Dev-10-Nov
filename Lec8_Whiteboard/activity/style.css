@@ -88,25 +88,19 @@
   width: 100%;
   }
   
-  .pencil-colors div{
-      
+  .pencil-colors div{  
   height: 30px;
-      
   width: 30px;
-      
   border-radius: 50%;
   }
   
   .red{
-  
   background: red;
   }
   .blue{
-  
   background: blue;
   }
   .yellow{
-  
   background: yellow;
   }
   .black{
