@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PepBoard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="tools-content">
+        <div class="tools">
+            <div class="tool active-tool" id="pencil">
+                <img src="./resources-master/resources-master/NewIcons/Black_Pencil.svg" alt="">
+                <div class="tool-options hide" id="pencil-options"> 
+                    <input type="range" name="pencil-size" id="pencil-size" value="1" min="1" max="40">
+                    <div class="pencil-colors">
+                        <div class="red"></div>
+                        <div class="blue"></div>
+                        <div class="yellow"></div>
+                        <div class="black"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tool" id="eraser">
+                <img src="./resources-master/resources-master/NewIcons/Eraser.svg" alt="">
+                <div class="tool-options hide" id="eraser-options"> 
+                    <input type="range" name="eraser-size" id="eraser-size" value="1" min="1" max="40">
+                </div>
+            </div>
+            <div class="tool" id="sticky">
+                <img src="./resources-master/resources-master/NewIcons/StickyNote.svg" alt="">
+            </div>
+            <div class="tool" id="photo">
+                <img src="./resources-master/resources-master/NewIcons/Photo.svg" alt="">
+                <input type="file" name="" id="photo-upload" style="display: none;">
+            </div>
+            <div class="tool" id="download">
+                <img src="./resources-master/resources-master/NewIcons/Download.svg" alt="">
+            </div>
+            <div class="tool" id="undo">
+                <img src="./resources-master/resources-master/NewIcons/Undo.svg" alt="">
+            </div>
+            <div class="tool" id="redo">
+                <img src="./resources-master/resources-master/NewIcons/Redo.svg" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="canvas">
+        <canvas id="canvas"></canvas>
+    </div>
+    <!-- <div class="sticky">
+        <div class="sticky-header">
+            <div class="minimize"></div>
+            <div class="close"></div>
+        </div>
+        <div class="sticky-content">
+            <textarea name="" id="sticky-text" cols="30" rows="10"></textarea>
+        </div>
+    </div> -->
+    <!-- <script>
+        let canvas = document.querySelector("#canvas");
+        let ctx = canvas.getContext('2d');
+        // ctx.fillStyle = 'yellow';
+        // ctx.fillRect(10 , 10 , 100 , 100);
+        ctx.strokeStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(10,10);
+        ctx.lineTo(100 , 10);
+        ctx.lineTo(250 , 100);
+        ctx.lineTo(10 , 100);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(100,110);
+        ctx.lineTo(20,50);
+        ctx.stroke();
+    </script> -->
+    <script src="./script.js"></script>
+    <script src="./tools.js"></script>
+    <script src="./sticky.js"></script>
+    <script src="./img.js"></script>
+    <script src="./util.js"></script>
+</body>
+</html>
