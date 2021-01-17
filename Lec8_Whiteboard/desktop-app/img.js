@@ -26,4 +26,6 @@ download.addEventListener("click" , function(){
     aTag.download = "canvas.png";
     aTag.href = image;
     aTag.click();
+
+    // <a download="canvas.png" href="akjsfajkbsfiahkjsbgab"/>
 })

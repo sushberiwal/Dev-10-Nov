@@ -24,6 +24,7 @@ ctx.lineCap = "round";
 
 let line = [];
 let isMouseDown = false;
+
 canvas.addEventListener("mousedown", function (e) {
   isMouseDown = true;
   let x = e.clientX;
@@ -39,6 +40,8 @@ canvas.addEventListener("mousedown", function (e) {
     color: ctx.strokeStyle,
   };
   line.push(pointObj);
+
+  socket.emit( "mousedown" , pointObj);
 });
 
 canvas.addEventListener("mousemove", function (e) {
@@ -56,6 +59,8 @@ canvas.addEventListener("mousemove", function (e) {
       color: ctx.strokeStyle,
     };
     line.push(pointObj);
+
+    socket.emit("mousemove" , pointObj);
   }
 });
 

@@ -18,9 +18,9 @@ function createWindow(){
           enableRemoteModule:true
         }
       })
+      win.removeMenu();
       win.loadFile('index.html').then(function(){
           win.maximize();
-          win.webContents.openDevTools();
       });
 }
 

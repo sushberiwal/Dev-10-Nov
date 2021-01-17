@@ -75,10 +75,19 @@
         ctx.lineTo(20,50);
         ctx.stroke();
     </script> -->
+
+    
+    <!-- socket.io code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.5/socket.io.js" integrity="sha512-2rUSTSAeOO02jF6eBqENNqPs1EohenJ5j+1dgDPdXSLz9nOlrr8DJk4zW/lDy8rjhGCSonW3Gx812XJQIKZKJQ==" crossorigin="anonymous"></script>
+   <script>
+        const socket = io.connect("https://pep-board.herokuapp.com");
+        // console.log(socket);
+    </script>
     <script src="./script.js"></script>
     <script src="./tools.js"></script>
     <script src="./sticky.js"></script>
     <script src="./img.js"></script>
     <script src="./util.js"></script>
+    <script src="./socket.js"></script>
 </body>
 </html>
