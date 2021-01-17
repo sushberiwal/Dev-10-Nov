@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PepChat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content">
+        <div class="chat-box">
+            <div class="left-view"></div>
+            <div class="right-view">
+                <div class="chat-list">
+                    <!-- <div class="chat left">Hey guys !</div>
+                    <div class="chat left">Hello eveyone !</div>
+                    <div class="join">admin joined the chat </div>
+                    <div class="chat left">How are you all ??</div>
+                    <div class="leave">admin left the chat</div>
+                    <div class="chat right">Let's make a plan ??</div> -->
+                </div>
+                <div class="chat-send">
+                    <input type="text" id="chat-message" placeholder="Type a message !">
+                    <div class="send-button" id="send-chat">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.5/socket.io.js" integrity="sha512-2rUSTSAeOO02jF6eBqENNqPs1EohenJ5j+1dgDPdXSLz9nOlrr8DJk4zW/lDy8rjhGCSonW3Gx812XJQIKZKJQ==" crossorigin="anonymous"></script>
+   <script>
+        const socket = io.connect("http://localhost:3000");
+    </script>
+    <script src="./script.js"></script>
+    <script src="./socket.js"></script>
+</body>
+</html>
